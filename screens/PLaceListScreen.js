@@ -1,13 +1,39 @@
 import React from "react";
-import { StyleSheet, View, Text, Button, Platform } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Button,
+  Platform,
+  FlatList,
+} from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import { useSelector } from "react-redux";
+
 import HeaderButton from "../components/HeaderButton";
+import PlaceItem from "../components/PLaceItem";
 
 const PlaceListSCreen = (props) => {
+  const places = useSelector((state) => state.places.places);
+
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Main screen</Text>
-    </View>
+    <FlatList
+      data={places}
+      renderItem={(itemData) => (
+        <PlaceItem
+          image={null}
+          title={itemData.item.title}
+          address={null}
+          onSelect ={() => {
+            props.navigation.navigate('PlaceDetail',{
+              placeTitel : itemData.item.title,
+              placeId : itemData.item.id
+            })
+          }}
+        />
+      )}
+      keyExtractor={(item) => item.id}
+    />
   );
 };
 
