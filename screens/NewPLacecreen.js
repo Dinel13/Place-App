@@ -15,6 +15,7 @@ import { addPlace } from "../store/PlaceAction";
 
 const NewPLacecreen = (props) => {
   const [titleValue, settitleValue] = useState("");
+  const [image, setImage] = useState();
 
   const dispatch = useDispatch();
 
@@ -23,9 +24,13 @@ const NewPLacecreen = (props) => {
   };
 
   const saveHandler = () => {
-    dispatch(addPlace(titleValue));
+    dispatch(addPlace(titleValue, image));
     props.navigation.goBack();
   };
+
+  const imageTakenHandler = imgPath => {
+    setImage(imgPath)
+  }
 
   return (
     <ScrollView>
@@ -36,7 +41,7 @@ const NewPLacecreen = (props) => {
           onChangeText={titleChangeHandler}
           value={titleValue}
         />
-        <ImagePicker />
+        <ImagePicker onImageTaken={imageTakenHandler}/>
         <Button
           title="Save Place"
           color={Colors.primary}
