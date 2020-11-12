@@ -1,5 +1,5 @@
 const vars = {
-googleAPiKety = 'AIzaSyBfdVRzwgssDItRf6Zi8ytfWy0dXBn_E_0'
+googleAPiKety :  'AIzaSyD-ZPcMh4YKvZJSo-H2C7ESf2PEDJWlcEc'
 }
 
 export default vars
