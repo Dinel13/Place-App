@@ -1,4 +1,4 @@
-import { ADD_PLACE } from "./PlaceAction";
+import { ADD_PLACE, SET_PLACES } from "./PlaceAction";
 import Places from "../models/Place";
 
 const initState = {
@@ -7,9 +7,15 @@ const initState = {
 
 export default (state = initState, action) => {
   switch (action.type) {
+    case SET_PLACES:
+      return {
+        places: action.places.map(
+          pl => new Places(pl.id.toString(), pl.title, pl.imageUri)
+        )
+      };
     case ADD_PLACE:
       const newPLace = new Places(
-        new Date().toString(),
+        action.placeData.id,
         action.placeData.title,
         action.placeData.imageUri
       );
