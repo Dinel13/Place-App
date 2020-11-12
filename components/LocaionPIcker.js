@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Button,
@@ -16,6 +16,14 @@ import MapPreview from "./MapPreview";
 const LocationPicker = (props) => {
   const [isFetching, setIsFetching] = useState(false);
   const [pickedLocation, setPickedLocation] = useState();
+
+  const mapPickedLOcation = props.navigation.getParam("pickedLocation");
+
+  useEffect(() => {
+    if (mapPickedLOcation) {
+      setPickedLocation(mapPickedLOcation);
+    }
+  }, [mapPickedLOcation]);
 
   const verifyPermissions = async () => {
     const result = await Permissions.askAsync(Permissions.LOCATION);
@@ -56,7 +64,7 @@ const LocationPicker = (props) => {
   };
 
   const pickOnMapHandler = () => {
-    props.navigation.navigate('MapScreen');
+    props.navigation.navigate("MapScreen");
   };
 
   return (
@@ -90,20 +98,20 @@ const LocationPicker = (props) => {
 
 const styles = StyleSheet.create({
   locationPicker: {
-    marginBottom: 15
+    marginBottom: 15,
   },
   mapPreview: {
     marginBottom: 10,
-    width: '100%',
+    width: "100%",
     height: 150,
-    borderColor: '#ccc',
-    borderWidth: 1
+    borderColor: "#ccc",
+    borderWidth: 1,
   },
   actions: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    width: '100%'
-  }
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "100%",
+  },
 });
 
 export default LocationPicker;

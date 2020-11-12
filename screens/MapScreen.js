@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import MapView, { Marker } from "react-native-maps";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 const MapScreen = (props) => {
   const [selectedLocation, setSelectedLocation] = useState();
@@ -24,8 +23,9 @@ const MapScreen = (props) => {
     if(!selectedLocation) {
       return;
     }
+    console.log(selectedLocation);
     props.navigation.navigate('NewPlace', {pickedLocation : selectedLocation})
-  }, []);
+  }, [selectedLocation]);
 
   useEffect(() => {
     props.navigation.setParams({ saveLocation: savePickedLocationHandler });
@@ -57,7 +57,7 @@ MapScreen.navigationOptions = (navData) => {
   const saveFn = navData.navigation.getParam("saveLocation");
   return {
     headerRight: () => (
-      <TouchableOpacity style={styles.headerButton} onPress={saveFn}>
+      <TouchableOpacity style={styles.headerButton} onPress={savePickedLocationHandler}>
         <Text style={styles.headerButtonText}>Save</Text>
       </TouchableOpacity>
     ),
