@@ -25,7 +25,7 @@ const MapScreen = (props) => {
     }
     console.log(selectedLocation);
     props.navigation.navigate('NewPlace', {pickedLocation : selectedLocation})
-  }, [selectedLocation]);
+  }, [selectedLocation]); 
 
   useEffect(() => {
     props.navigation.setParams({ saveLocation: savePickedLocationHandler });
@@ -57,7 +57,7 @@ MapScreen.navigationOptions = (navData) => {
   const saveFn = navData.navigation.getParam("saveLocation");
   return {
     headerRight: () => (
-      <TouchableOpacity style={styles.headerButton} onPress={savePickedLocationHandler}>
+      <TouchableOpacity style={styles.headerButton} onPress={saveFn}>
         <Text style={styles.headerButtonText}>Save</Text>
       </TouchableOpacity>
     ),
